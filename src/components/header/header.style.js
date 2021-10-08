@@ -10,6 +10,8 @@ export const Header = styled.header`
   & h1 {
     font-size: 1rem;
     flex-grow: 1;
+    text-align: left;
+    padding-left: 10px;
   }
 
   & h1:hover,
@@ -21,5 +23,16 @@ export const Header = styled.header`
   & h2 {
     font-size: 0.6rem;
     margin: 0 7px;
+  }
+  @media (min-width: 500px) {
+    & h1 {
+      font-size: 1.3rem;
+    }
+    & h2 {
+      font-size: 0.9rem;
+    }
+  }
+  @media (min-width: 720px) {
+    padding: 0 calc(calc(100vw - 720px) / 2);
   }
 `;
