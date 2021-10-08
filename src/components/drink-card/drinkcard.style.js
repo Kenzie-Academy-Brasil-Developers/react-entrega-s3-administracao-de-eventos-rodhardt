@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const DrinkCardContainer = styled.div`
-  background-color: blue;
-
+  & img {
+    width: 50px;
+  }
   & p {
-    color: white;
+    font-size: 0.8rem;
+    flex-grow: 1;
   }
 `;

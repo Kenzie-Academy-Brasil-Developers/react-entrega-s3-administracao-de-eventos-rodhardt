@@ -1,5 +1,7 @@
+import DrinkList from "../../components/drink-list";
+
 const Confraternizacao = () => {
-  return <div>Confrat</div>;
+  return <DrinkList page={"confraternizacao"} />;
 };
 
 export default Confraternizacao;

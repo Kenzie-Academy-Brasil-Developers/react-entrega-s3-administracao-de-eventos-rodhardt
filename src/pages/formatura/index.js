@@ -1,5 +1,7 @@
+import DrinkList from "../../components/drink-list";
+
 const Formatura = () => {
-  return <div>Formatura</div>;
+  return <DrinkList page={"formatura"} />;
 };
 
 export default Formatura;

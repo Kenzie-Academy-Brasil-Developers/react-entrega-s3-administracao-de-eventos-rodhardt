@@ -6,15 +6,22 @@ export const DrinkSelectionProvider = ({ children }) => {
   const [selectedDrinks, setSelectedDrinks] = useState([]);
 
   const addDrink = (drink, event) => {
-    const selectedDrink = drink;
-    selectedDrink["event"] = event;
-    setSelectedDrinks([...selectedDrinks, selectedDrink]);
+    if (event !== "") {
+      const selectedDrink = { ...drink };
+      selectedDrink["event"] = event;
+      setSelectedDrinks([
+        ...selectedDrinks.filter(
+          (element) => !(element.id === drink.id && element.event === event)
+        ),
+        selectedDrink,
+      ]);
+    }
   };
 
   const removeDrink = (drink, event) => {
     setSelectedDrinks([
       ...selectedDrinks.filter(
-        (element) => element.id !== drink.id && element["event"] !== event
+        (element) => !(element.id === drink.id && element.event === event)
       ),
     ]);
   };

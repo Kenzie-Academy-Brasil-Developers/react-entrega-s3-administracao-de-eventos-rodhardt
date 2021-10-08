@@ -1,7 +1,7 @@
 import DrinkList from "../../components/drink-list";
 
 const Casamento = () => {
-  return <DrinkList type={"casamento"} />;
+  return <DrinkList page={"casamento"} />;
 };
 
 export default Casamento;

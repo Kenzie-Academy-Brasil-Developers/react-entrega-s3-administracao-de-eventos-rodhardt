@@ -3,7 +3,9 @@ import { DrinkCatalogueContext } from "../../providers/catalogue";
 import { DrinkSelectionContext } from "../../providers/selected";
 
 import DrinkCard from "../drink-card";
-import ButtonSelect from "../button";
+
+import { Button } from "../button/button.style";
+import { DrinkListContainer } from "./drinklist.style";
 
 import { useState } from "react";
 
@@ -16,27 +18,47 @@ const DrinkList = ({ page }) => {
   const [targetEvent, setTargetEvent] = useState("");
 
   return (
-    <section className="drink-list">
+    <DrinkListContainer>
       <h2>{page[0].toUpperCase().concat(page.slice(1))}</h2>
-      {page === "catalogue" &&
-        drinkCatalogue.map((drink, index) => (
-          <li key={index}>
-            <DrinkCard drink={drink} />
-            <select
-              name="target"
-              id="target-select"
-              onChange={(evt) => setTargetEvent(evt.target.value)}
-            >
-              <option value="">--Selecione um evento--</option>
-              <option value="casamento">Casamento</option>
-              <option value="formatura">Formatura</option>
-              <option value="confraternizacao">Confraternização</option>
-            </select>
-            <ButtonSelect drink={drink} page={page} target={targetEvent} />
-          </li>
-        ))}
-      {page !== "catalogue" && <p>oi</p>}
-    </section>
+      {page === "catalogue" && (
+        <ul>
+          {drinkCatalogue.map((drink, index) => (
+            <li key={index}>
+              <DrinkCard drink={drink} />
+              <div className="input-drink">
+                <select
+                  name="target"
+                  id="target-select"
+                  onChange={(evt) => setTargetEvent(evt.target.value)}
+                >
+                  <option value="">--Selecione um evento--</option>
+                  <option value="casamento">Casamento</option>
+                  <option value="formatura">Formatura</option>
+                  <option value="confraternizacao">Confraternização</option>
+                </select>
+                <Button onClick={() => addDrink(drink, targetEvent)}>
+                  Adicionar
+                </Button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      {page !== "catalogue" && (
+        <ul>
+          {selectedDrinks
+            .filter((element) => element["event"] === page)
+            .map((drink, index) => (
+              <li key={index}>
+                <DrinkCard drink={drink} />
+                <Button onClick={() => removeDrink(drink, page)}>
+                  Remover
+                </Button>
+              </li>
+            ))}
+        </ul>
+      )}
+    </DrinkListContainer>
   );
 };
 
